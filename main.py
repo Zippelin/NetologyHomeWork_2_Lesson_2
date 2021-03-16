@@ -39,17 +39,17 @@ class WikiComposer:
 
 
 # Задание 2
-def file_crypt(file_ath):
-    with open(file_ath, 'r') as f:
-        yield hashlib.md5(f.readline().encode('utf-8')).hexdigest()
-        next(f)
+def file_crypt(f):
+    for line in f:
+        yield hashlib.md5(line.encode('utf-8')).hexdigest()
 
 
 if __name__ == '__main__':
     # Задача 1
-    pairs_saver = WikiComposer(DB_FILE)
-    pairs_saver.generate_urls()
+    # pairs_saver = WikiComposer(DB_FILE)
+    # pairs_saver.generate_urls()
 
     # Задача 2
-    for line in file_crypt('1.txt'):
-        print(line)
+    with open('1.txt', 'r') as f:
+        for line in file_crypt(f):
+            print(line)
